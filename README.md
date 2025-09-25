@@ -1,59 +1,137 @@
-# Angularprova
+# Sistema de Gerenciamento de Alunos - Frontend Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Este é o frontend Angular para o sistema CRUD de alunos, desenvolvido para integrar com o backend Spring Boot.
 
-## Development server
+## Funcionalidades
 
-To start a local development server, run:
+- **Página Inicial**: Apresentação do sistema com descrição das funcionalidades
+- **Lista de Alunos**: Visualização de todos os alunos cadastrados com funcionalidade de busca
+- **Cadastro de Alunos**: Formulário para adicionar novos alunos
+- **Edição de Alunos**: Formulário para editar informações de alunos existentes
+- **Exclusão de Alunos**: Funcionalidade para remover alunos com confirmação
 
+## Tecnologias Utilizadas
+
+- Angular 18+
+- TypeScript
+- HTML5 e CSS3
+- Angular Router para navegação
+- Angular Forms para validação
+- HttpClient para comunicação com API
+
+## Estrutura do Projeto
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── home/              # Página inicial
+│   │   ├── aluno-list/        # Lista de alunos
+│   │   └── aluno-form/        # Formulário de aluno
+│   ├── models/
+│   │   └── aluno.model.ts     # Interface do modelo Aluno
+│   ├── services/
+│   │   └── aluno.ts           # Serviço para API de alunos
+│   ├── app.routes.ts          # Configuração de rotas
+│   ├── app.config.ts          # Configuração da aplicação
+│   └── app.ts                 # Componente principal
+└── styles.css                 # Estilos globais
+```
+
+## Configuração e Execução
+
+### Pré-requisitos
+
+- Node.js 18+ 
+- npm ou yarn
+- Angular CLI
+
+### Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/Kayonz/trabalho_aluno_frontend.git
+cd trabalho_aluno_frontend
+```
+
+2. Instale as dependências:
+```bash
+npm install
+```
+
+3. Configure a URL do backend no arquivo `src/app/services/aluno.ts`:
+```typescript
+private apiUrl = 'http://localhost:8080/api/alunos';
+```
+
+### Execução
+
+Para executar em modo de desenvolvimento:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A aplicação estará disponível em `http://localhost:4200`
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
+Para build de produção:
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Integração com Backend
 
-## Running unit tests
+O frontend está configurado para se comunicar com o backend Spring Boot através das seguintes APIs:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `GET /api/alunos` - Listar todos os alunos
+- `GET /api/alunos/{id}` - Buscar aluno por ID
+- `POST /api/alunos` - Criar novo aluno
+- `PUT /api/alunos/{id}` - Atualizar aluno
+- `DELETE /api/alunos/{id}` - Deletar aluno
 
-```bash
-ng test
-```
+## Validações
 
-## Running end-to-end tests
+O formulário de aluno inclui as seguintes validações:
 
-For end-to-end (e2e) testing, run:
+- **Nome**: Obrigatório, mínimo 3 caracteres
+- **Curso**: Obrigatório, mínimo 3 caracteres  
+- **Telefone**: Opcional
 
-```bash
-ng e2e
-```
+## Funcionalidades Implementadas
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Navegação
+- Menu de navegação responsivo
+- Roteamento entre páginas
+- Indicação visual da página ativa
 
-## Additional Resources
+### Lista de Alunos
+- Exibição em tabela responsiva
+- Campo de busca por nome ou curso
+- Botões de ação (Editar/Excluir)
+- Modal de confirmação para exclusão
+- Estado vazio quando não há alunos
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Formulário de Aluno
+- Validação em tempo real
+- Mensagens de erro específicas
+- Suporte para criação e edição
+- Botões de ação (Salvar/Cancelar)
+
+### Design Responsivo
+- Layout adaptável para desktop e mobile
+- Componentes otimizados para touch
+- Tipografia e cores consistentes
+
+## Próximos Passos
+
+Para completar a integração:
+
+1. Certifique-se de que o backend Spring Boot está rodando na porta 8080
+2. Configure CORS no backend para permitir requisições do frontend
+3. Teste todas as operações CRUD
+4. Implemente tratamento de erros mais robusto
+5. Adicione notificações de sucesso/erro para o usuário
+
+## Contribuição
+
+Este projeto foi desenvolvido como parte de uma atividade acadêmica seguindo os requisitos especificados no documento PDF fornecido.
+

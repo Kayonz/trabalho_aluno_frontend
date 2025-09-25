@@ -1,0 +1,74 @@
+<div class="aluno-form-container">
+  <div class="form-header">
+    <h2>{{ isEdicao ? 'Editar Aluno' : 'Novo Aluno' }}</h2>
+    <button class="btn btn-secondary" (click)="voltar()">Voltar</button>
+  </div>
+
+  <form (ngSubmit)="salvar()" #alunoForm="ngForm" class="aluno-form">
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input 
+        type="text" 
+        id="nome" 
+        name="nome"
+        [(ngModel)]="aluno.nome"
+        #nome="ngModel"
+        required
+        minlength="3"
+        class="form-control"
+        [class.error]="nome.invalid && nome.touched"
+        placeholder="Digite o nome completo do aluno">
+      
+      <div class="error-messages" *ngIf="nome.invalid && nome.touched">
+        <small *ngIf="nome.errors?.['required']">Nome é obrigatório</small>
+        <small *ngIf="nome.errors?.['minlength']">Nome deve ter pelo menos 3 caracteres</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="curso">Curso *</label>
+      <input 
+        type="text" 
+        id="curso" 
+        name="curso"
+        [(ngModel)]="aluno.curso"
+        #curso="ngModel"
+        required
+        minlength="3"
+        class="form-control"
+        [class.error]="curso.invalid && curso.touched"
+        placeholder="Digite o nome do curso">
+      
+      <div class="error-messages" *ngIf="curso.invalid && curso.touched">
+        <small *ngIf="curso.errors?.['required']">Curso é obrigatório</small>
+        <small *ngIf="curso.errors?.['minlength']">Curso deve ter pelo menos 3 caracteres</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone</label>
+      <input 
+        type="tel" 
+        id="telefone" 
+        name="telefone"
+        [(ngModel)]="aluno.telefone"
+        class="form-control"
+        placeholder="Digite o telefone (opcional)">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="voltar()">Cancelar</button>
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="alunoForm.invalid || salvando">
+        {{ salvando ? 'Salvando...' : (isEdicao ? 'Atualizar' : 'Salvar') }}
+      </button>
+    </div>
+  </form>
+
+  <div class="form-info">
+    <p><small>* Campos obrigatórios</small></p>
+  </div>
+</div>
+

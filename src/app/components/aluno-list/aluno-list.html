@@ -1,0 +1,61 @@
+<div class="aluno-list-container">
+  <div class="header">
+    <h2>Lista de Alunos</h2>
+    <button class="btn btn-primary" (click)="novoAluno()">Novo Aluno</button>
+  </div>
+
+  <div class="search-section">
+    <input 
+      type="text" 
+      placeholder="Buscar por nome ou curso..." 
+      [(ngModel)]="filtro"
+      (input)="filtrarAlunos()"
+      class="search-input">
+  </div>
+
+  <div class="table-container" *ngIf="alunosFiltrados.length > 0; else semAlunos">
+    <table class="alunos-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Curso</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunosFiltrados">
+          <td>{{ aluno.id }}</td>
+          <td>{{ aluno.nome }}</td>
+          <td>{{ aluno.curso }}</td>
+          <td>{{ aluno.telefone || 'Não informado' }}</td>
+          <td class="actions">
+            <button class="btn btn-secondary btn-sm" (click)="editarAluno(aluno)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="confirmarExclusao(aluno)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #semAlunos>
+    <div class="empty-state">
+      <p>Nenhum aluno encontrado.</p>
+      <button class="btn btn-primary" (click)="novoAluno()">Cadastrar Primeiro Aluno</button>
+    </div>
+  </ng-template>
+
+  <!-- Modal de confirmação de exclusão -->
+  <div class="modal" *ngIf="alunoParaExcluir" (click)="cancelarExclusao()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Confirmar Exclusão</h3>
+      <p>Tem certeza que deseja excluir o aluno <strong>{{ alunoParaExcluir.nome }}</strong>?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="cancelarExclusao()">Cancelar</button>
+        <button class="btn btn-danger" (click)="excluirAluno()">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
