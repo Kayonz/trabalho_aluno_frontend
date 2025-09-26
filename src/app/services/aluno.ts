@@ -7,6 +7,7 @@ import { Aluno } from '../models/aluno.model';
   providedIn: 'root'
 })
 export class AlunoService {
+  
   private apiUrl = 'http://localhost:8080/api/alunos';
 
   constructor(private http: HttpClient) { }
